@@ -1,4 +1,4 @@
-boolean start = false; //<>//
+boolean start = false;
 
 void setup() {
   size(1280, 720);
