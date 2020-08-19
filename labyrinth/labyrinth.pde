@@ -24,5 +24,13 @@ rect(950, 60, 330, 60);
 rect(150, 380, 60, 460);
 rect(950, 450, 60, 200);
 rect(750, 590, 200, 60);
+}
 
+void draw() {
+
+  circle(mouseX, mouseY, 40);
+  fill(255, 0, 0);
+  noStroke();
+  
+  
 }
