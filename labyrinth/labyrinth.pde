@@ -1,10 +1,18 @@
 boolean start = false;
 int x = 30;
 int y = 690;
+int circleSize = 40;
+color white = color(255, 255, 255);
+
+
+ 
 void setup() {
   size(1280, 720);
   mouseX = 30;
   mouseY = 690;
+
+
+
 }
 void mouseDragged() {
   x = mouseX;
@@ -12,6 +20,7 @@ void mouseDragged() {
 }
 
 void draw() {
+  
   background(0, 0, 0);
   stroke(0, 200, 255);
   fill(0, 200, 255);
@@ -37,8 +46,16 @@ void draw() {
   rect(950, 450, 60, 200);
   rect(750, 590, 200, 60);
   
+  
     stroke(255, 0, 0);
     fill(255, 0, 0);
-    circle(x, y, 40);
+    circle(x, y, circleSize);
+    loadPixels();
+    if (pixels[x + y * circleSize] == color(0, 0, 0) || pixels[x + y * circleSize] == color(0, 0, 255)) {
+      println("true");
+    } else {
+      println("false");
+      circleSize -= 5;
+    }
 }
   
