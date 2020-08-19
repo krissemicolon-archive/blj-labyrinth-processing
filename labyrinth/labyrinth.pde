@@ -1,8 +1,14 @@
 boolean start = false;
-
+int x = 30;
+int y = 690;
 void setup() {
   size(1280, 720);
-
+  mouseX = 30;
+  mouseY = 690;
+}
+void mouseDragged() {
+  x = mouseX;
+  y = mouseY;
 }
 
 void draw() {
@@ -33,6 +39,6 @@ void draw() {
   
     stroke(255, 0, 0);
     fill(255, 0, 0);
-    circle(mouseX, mouseY, 40);
+    circle(x, y, 40);
 }
   
