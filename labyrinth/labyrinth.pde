@@ -14,6 +14,8 @@ PFont font;
 String time = "45";
 int t;
 int interval = 45;
+int points = 150;
+int timer;
 
 
 
@@ -31,7 +33,8 @@ int rects[][] = {
   {950, 60, 330, 60},
   {150, 380, 60, 490},
   {950, 450, 60, 200},
-  {750, 590, 260, 60}
+  {750, 590, 260, 60},
+  {1220, 0, 60, 120}
 };
  
 void setup() {
@@ -55,13 +58,13 @@ void mouseDragged() {
 }
 
 void draw() {
-
+  if (millis() - timer > 1000) {
+    points -= 2;
+    timer = millis();
+  }
 
   fill(0, 102, 153); 
   background(0, 0, 0);
-  stroke(0, 200, 255);
-  fill(0, 200, 255);
-  square(victorySquare[0], victorySquare[1], victorySquare[2]);
   stroke(255, 255, 255);
   fill(255, 255, 255);
   textSize(30);
@@ -79,6 +82,9 @@ void draw() {
     rect(rect[0], rect[1], rect[2], rect[3]);
      
   }
+  stroke(0, 200, 255);
+  fill(0, 200, 255);
+  square(victorySquare[0], victorySquare[1], victorySquare[2]);
   
   for (int i = 0; i < rects.length; i++) { 
     if (isBallInLab(rects[i]) == true) {
@@ -87,16 +93,18 @@ void draw() {
         collisionIndex++;
         
     } 
-   
+
   }
   if (collisionIndex == 0) { //<>//
     //text("FALSE", 15, 30);
     circleSize -= 5;
     lives -= 1;
+    points -= 10;
+    delay(150);
   }
 
   
-  //MOUSE
+
   stroke(255, 0, 0);
   fill(255, 0, 0);
   circle(x, y, circleSize);
@@ -106,10 +114,13 @@ void draw() {
   if (isBallInSquare(victorySquare) == true) {
     stop();
     image(victory, 0, 0);
+    textSize(40);
+    text("Points: " + points, 540, 500);
     
   }
   if (lives == 0 || time.equals("000")) {
     stop();
     image(gameover, 0, 0);
+
   }
 }  
