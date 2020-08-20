@@ -35,9 +35,11 @@ void setup() {
 }
 
 void mouseDragged() {
+  if(istMausUeberCircle() == true) {
   x = mouseX;
   y = mouseY;
   
+  }
 }
 
 void draw() {
@@ -84,9 +86,10 @@ void draw() {
     rectIndex = 0;
     
   } 
+  //MOUSE
   stroke(255, 0, 0);
   fill(255, 0, 0);
   circle(x, y, circleSize);
-   
+  
 }
   
