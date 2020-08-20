@@ -3,7 +3,7 @@ int x = 30;
 int y = 690;
 int circleSize = 40;
   int rects[][] = {
-    {60, 660, 600, 60},
+    {0, 660, 660, 60},
     {660, 300, 60, 500},
     {330, 450, 330, 60},
     {500, 150, 60, 300},
@@ -30,6 +30,7 @@ void setup() {
 void mouseDragged() {
   x = mouseX;
   y = mouseY;
+ 
 }
 
 void draw() {
@@ -37,21 +38,29 @@ void draw() {
   background(0, 0, 0);
   stroke(0, 200, 255);
   fill(0, 200, 255);
-  square(0, 660, 60);
   square(1220, 0, 60);
-    
   stroke(255, 255, 255);
   fill(255, 255, 255);
-
-  for (int i = 0; i < rects.length; i++) {
+    
+  
+   
+    int i = 0;
     int rect[] = rects[i];
+  for (i = 0; i < rects.length; i++) {
     rect(rect[0], rect[1], rect[2], rect[3]);
+     
+  }
+    i = 0;
+   if (x - circleSize / 2 >= rect[0] && x + circleSize / 2 <= rect[0] + rect[1] && y - circleSize / 2 >= rect[1] && y + circleSize / 2 <= rect[1] + rect[3] && y + circleSize / 2 <= rect[1] + rect[2]) {
+      println("true");
+  } else {
+      println("false");
   }
   
     stroke(255, 0, 0);
     fill(255, 0, 0);
     circle(x, y, circleSize);
      
-    
+
 }
   
