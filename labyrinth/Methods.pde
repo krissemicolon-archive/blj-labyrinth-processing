@@ -30,12 +30,18 @@ boolean isBallInSquare(int victorySquare[]) {
   } 
 
 }
+
 boolean isMouseOverCircle() {
-  if (mouseX < x + circleSize / 2 && mouseX > x + circleSize / 2) {
-    return true;
-  }
+
+  
+ if (    
+         mouseX < x + circleSize /2 && mouseX > x - circleSize
+ ){
+        return true;
+  } 
   else {
     return false;
-  }
-  
+  } 
+
+
 }

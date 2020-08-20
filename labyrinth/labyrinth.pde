@@ -39,9 +39,11 @@ void setup() {
 }
 
 void mouseDragged() {
-  if (isMouseOverCircle() == true) {
+  if(isMouseOverCircle() == true) {
   x = mouseX;
   y = mouseY;
+  
+
   }
 }
 
@@ -74,20 +76,22 @@ void draw() {
     text(collisionIndex, 15, 140);
     text("FALSE", 15, 30);
   }
+
+  rectIndex++;
+  if (rectIndex > 13) {
+    rectIndex = 0;
+    
+  } 
+  //MOUSE
+  stroke(255, 0, 0);
+  fill(255, 0, 0);
+  circle(x, y, circleSize);
+  
+
   collisionIndex = 0;
   if (isBallInSquare(victorySquare) == true) {
     stop();
     image(victory, 0, 0);
     
   }
-  rectIndex++;
-  if (rectIndex > 13) {
-    rectIndex = 0;
-    
-  } 
-  stroke(255, 0, 0);
-  fill(255, 0, 0);
-  circle(x, y, circleSize);
-   
-}
-  
+}  
