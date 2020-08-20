@@ -70,7 +70,15 @@ void draw() {
     println("collision!");
   }
   
-  
+  if (istBallImQuadrat(victorySquare) == true) {
+    stop();
+    textSize(70);
+    fill(255, 0, 0);
+    text("VICTORY!", 490, 360);
+    
+    
+    
+  }
   rectIndex++;
   if (rectIndex > 13) {
     rectIndex = 0;
