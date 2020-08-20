@@ -1,4 +1,4 @@
-boolean istBallInLabyrinth(int rectCollision[]) {
+boolean isBallInLab(int rectCollision[]) {
 
   
  if (    x - circleSize / 2 > rectCollision[0] 
@@ -14,7 +14,7 @@ boolean istBallInLabyrinth(int rectCollision[]) {
   } 
 
 }
-boolean istBallImQuadrat(int victorySquare[]) {
+boolean isBallInSquare(int victorySquare[]) {
 
   
  if (    x - circleSize / 2 > victorySquare[0] 
@@ -29,4 +29,13 @@ boolean istBallImQuadrat(int victorySquare[]) {
     return false;
   } 
 
+}
+boolean isMouseOverCircle() {
+  if (mouseX < x + circleSize / 2 && mouseX > x + circleSize / 2) {
+    return true;
+  }
+  else {
+    return false;
+  }
+  
 }

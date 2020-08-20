@@ -9,6 +9,9 @@ int circleSize = 40;
 int rectTrue = 0;
 int victorySquare[] = {1220, 0, 60};
 boolean collision = false;
+PImage victory;
+
+
 
 int rects[][] = {
   {0, 660, 720, 60},
@@ -32,17 +35,17 @@ void setup() {
   size(1280, 720);
   mouseX = 30;
   mouseY = 690;
+  victory = loadImage("victory.jpg");
 }
 
 void mouseDragged() {
+  if (isMouseOverCircle() == true) {
   x = mouseX;
   y = mouseY;
-  
+  }
 }
 
 void draw() {
-
-
   
   fill(0, 102, 153); 
   background(0, 0, 0);
@@ -59,24 +62,22 @@ void draw() {
      
   }
   
-  if (istBallInLabyrinth(rects[rectIndex]) == true) {
+  if (isBallInLab(rects[rectIndex]) == true) {
       collision = false;
       text("TRUE", 15, 30);
-      collisionIndex += 1;
+      collisionIndex++;
+      text(collisionIndex, 15, 120);
   } 
-
+  text(collisionIndex, 15, 130);
   
-  if (collision == true) {
-    println("collision!");
+  if (collisionIndex == 0) {
+    text(collisionIndex, 15, 140);
+    text("FALSE", 15, 30);
   }
-  
-  if (istBallImQuadrat(victorySquare) == true) {
+  collisionIndex = 0;
+  if (isBallInSquare(victorySquare) == true) {
     stop();
-    textSize(70);
-    fill(255, 0, 0);
-    text("VICTORY!", 490, 360);
-    
-    
+    image(victory, 0, 0);
     
   }
   rectIndex++;
