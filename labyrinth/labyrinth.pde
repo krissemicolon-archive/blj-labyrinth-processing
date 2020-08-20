@@ -1,7 +1,9 @@
 boolean start = false;
 int x = 30;
 int y = 690;
+int rectIndex = 0;
 int circleSize = 40;
+int rectTrue = 0;
   int rects[][] = {
     {0, 660, 660, 60},
     {660, 300, 60, 500},
@@ -42,21 +44,33 @@ void draw() {
   stroke(255, 255, 255);
   fill(255, 255, 255);
     
-  
-   
-    int i = 0;
-    int rect[] = rects[i];
-  for (i = 0; i < rects.length; i++) {
-    rect(rect[0], rect[1], rect[2], rect[3]);
-     
+    
+    for (int i = 0; i < rects.length; i++) { 
+      int rect[] = rects[i];
+       rect(rect[0], rect[1], rect[2], rect[3]);
+       
+
   }
-    i = 0;
-   if (x - circleSize / 2 >= rect[0] && x + circleSize / 2 <= rect[0] + rect[1] && y - circleSize / 2 >= rect[1] && y + circleSize / 2 <= rect[1] + rect[3] && y + circleSize / 2 <= rect[1] + rect[2]) {
-      println("true");
-  } else {
-      println("false");
-  }
-  
+      
+      int rectCollision[] = rects[rectIndex];
+      
+     if (x - circleSize / 2 >= rectCollision[0] && x + circleSize / 2 <= rectCollision[0] + rectCollision[1] && y - circleSize / 2 >= rectCollision[1] && y + circleSize / 2 <= rectCollision[1] + rectCollision[3] && y + circleSize / 2 <= rectCollision[1] + rectCollision[2]) {
+        rectTrue++;
+      } 
+
+      rectIndex++;
+      if (rectIndex > 13) {
+        rectIndex = 0;
+        
+      }
+            
+      if (rectTrue == 1) {
+        println("true");
+      } else if (rectTrue == 0) {
+        println("false");
+      }
+      rectTrue = 0;
+
     stroke(255, 0, 0);
     fill(255, 0, 0);
     circle(x, y, circleSize);
