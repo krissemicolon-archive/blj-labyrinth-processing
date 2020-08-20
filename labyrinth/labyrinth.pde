@@ -100,7 +100,7 @@ void draw() {
     circleSize -= 5;
     lives -= 1;
     points -= 10;
-    delay(150);
+    delay(80);
   }
 
   
