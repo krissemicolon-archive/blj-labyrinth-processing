@@ -139,12 +139,3 @@ void draw() {
       stop();
     }
   }
-
-void keyPressed() {
-    if (key==ENTER||key==RETURN) {
-    state++;
-  } else {
-    result = result + key;
-  }
-
-}
