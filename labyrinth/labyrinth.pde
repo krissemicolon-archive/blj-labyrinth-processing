@@ -27,7 +27,7 @@ boolean textInputIndex = true;
 SoundFile collisionSound;
 SoundFile victorySound;
 SoundFile gameOverSound;
-//SoundFile backgroundMusic;
+SoundFile backgroundMusic;
 int rects[][] = {
   {0, 660, 720, 60}, 
   {660, 300, 60, 470}, 
@@ -45,6 +45,7 @@ int rects[][] = {
   {750, 590, 260, 60}, 
   {1220, 0, 60, 120}
 };
+
 
 
 void setup() {
@@ -123,7 +124,7 @@ void draw() {
 
     collisionIndex = 0;
     if (isBallInSquare(victorySquare) == true) {
-     // backgroundMusic.stop();
+      //backgroundMusic.stop();
       pointsFinal = points;
       if (textInputIndex == true) {
         image(victory, 0, 0);
@@ -137,7 +138,7 @@ void draw() {
   }
 
   if (lives == 0 || time.equals("000")) {
-   // backgroundMusic.stop();
+    //backgroundMusic.stop();
     image(gameover, 0, 0);
     gameOverSound.play();
     stop();
