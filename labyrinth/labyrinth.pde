@@ -1,4 +1,4 @@
-int state = 0;
+int state = 0; //<>//
 String result = "";
 int x = 30;
 int y = 690;
@@ -108,7 +108,7 @@ void draw() {
     textSize(30);
     text("Lives: " + lives, 15, 60);
 
-
+    //VICTORY
     collisionIndex = 0;
     if (isBallInSquare(victorySquare) == true) {
       pointsFinal = points;
@@ -129,7 +129,6 @@ void draw() {
         }
 
         if (!result.equals("")) {
-        
         }
       }
     }
@@ -137,7 +136,6 @@ void draw() {
     if (lives == 0 || time.equals("000")) {
       image(gameover, 0, 0);
       stop();
-
     }
   }
 }
