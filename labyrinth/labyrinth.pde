@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 int state = 0;
 String result = "";
 int x = 30;
@@ -22,6 +24,9 @@ int pointsFinal;
 boolean gameOver = false;
 boolean start = true;
 boolean textInputIndex = true;
+SoundFile collisionSound;
+SoundFile victorySound;
+SoundFile gameOverSound;
 int rects[][] = {
   {0, 660, 720, 60}, 
   {660, 300, 60, 470}, 
@@ -47,6 +52,9 @@ void setup() {
   mouseY = 690;
   victory = loadImage("victory.jpg");
   gameover = loadImage("gameover.jpg");
+  collisionSound = new SoundFile(this, "collision.mp3");
+  victorySound = new SoundFile(this, "victory.mp3");
+  gameOverSound = new SoundFile(this, "gameover.mp3");
 }
 
 void mouseDragged() {
@@ -93,6 +101,7 @@ void draw() {
     }
     if (collisionIndex == 0) {
       //text("FALSE", 15, 30);
+      collisionSound.play();
       circleSize -= 5;
       lives -= 1;
       points -= 10;
@@ -111,42 +120,31 @@ void draw() {
 
     collisionIndex = 0;
     if (isBallInSquare(victorySquare) == true) {
-      pointsFinal = points;
-      if (textInputIndex == true) {
-        image(victory, 0, 0);
-        textSize(40);
-        text("Points: " + pointsFinal, 540, 500);
-        switch (state) {
-        case 0:
-          fill(255, 0, 0);
-          text("Name: " + result, 600, 540);
-          break;
 
-        case 1:
-          fill(255, 2, 2);
-          text ("Congratulations " + result + "!", 600, 540);
-          break;
-        }
+        pointsFinal = points;
+        if (textInputIndex == true) {
+          image(victory, 0, 0);
+          victorySound.play();
 
-        if (!result.equals("")) {
-        
+          stop();
+          textSize(40);
+          text("Points: " + pointsFinal, 540, 500);
         }
       }
     }
 
     if (lives == 0 || time.equals("000")) {
       image(gameover, 0, 0);
+      gameOverSound.play();
       stop();
-
     }
   }
-}
+
 void keyPressed() {
-
-  if (key==ENTER||key==RETURN) {
-
+    if (key==ENTER||key==RETURN) {
     state++;
   } else {
     result = result + key;
   }
+
 }
