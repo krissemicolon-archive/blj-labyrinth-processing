@@ -1,7 +1,3 @@
-import de.bezier.data.sql.*; //<>// //<>//
-import de.bezier.data.sql.mapper.*;
-MySQL msql;
-
 int state = 0;
 String result = "";
 int x = 30;
@@ -51,19 +47,6 @@ void setup() {
   mouseY = 690;
   victory = loadImage("victory.jpg");
   gameover = loadImage("gameover.jpg");
-  
-  //MSQL
-  String user = "player";
-  String pass = "thispassissecure";
-  String database = "labhighscoredb";
-  
-  msql = new MySQL(this, "localhost", database, user, pass);
-  
-  if(msql.connect()){
-    msql.query("INSERT INTO ");
-    
-  }
-
 }
 
 void mouseDragged() {
