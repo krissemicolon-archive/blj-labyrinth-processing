@@ -1,5 +1,12 @@
 import processing.sound.*;
 import controlP5.*;
+import processing.sound.*;
+import de.bezier.data.sql.*;
+import de.bezier.data.sql.mapper.*;
+import java.util.Collections;
+//import java.util.ArrayList;
+
+MySQL hsdb;
 
 ControlP5 cp5;
 
@@ -31,6 +38,9 @@ SoundFile collisionSound;
 SoundFile victorySound;
 SoundFile gameOverSound;
 SoundFile backgroundMusic;
+
+ArrayList<Integer> scores = new ArrayList();
+
 int rects[][] = {
   {0, 660, 720, 60}, 
   {660, 300, 60, 470}, 
@@ -65,6 +75,14 @@ void setup() {
   PFont font = createFont("arial", 15);
   cp5 = new ControlP5(this);
   cp5.addTextfield("Name").setPosition(30, 160).setSize(180, 60).setAutoClear(false).setFont(font);
+  
+  //MSQL
+  String user = "player";
+  String pass = "thispassissecure";
+  String database = "labhighscoredb";
+  
+  
+  hsdb = new MySQL(this, "84.227.79.186:3306", database, user, pass);
 }
 
 
@@ -139,7 +157,21 @@ void draw() {
       if (textInputIndex == true) {
         image(victory, 0, 0);
         victorySound.play();
-
+        
+        //SQL
+        if(hsdb.connect()){
+          hsdb.query("USE labhighscoredb");
+          hsdb.query("INSERT INTO `highscores` (`id`,`name`,`highscore`) VALUES (NULL, `%02d`, `%02d`);", highscoreName, pointsFinal);
+          hsdb.query("SELECT * FROM highscores");
+          
+          while(hsdb.next()) {
+            scores.add(hsdb.getInt("highscore"));
+          }
+          
+          int highscore = Collections.max(scores);
+          println(hsdb.getInt(1));
+        }
+        
         stop();
         textSize(40);
         text("Points: " + pointsFinal, 540, 500);
