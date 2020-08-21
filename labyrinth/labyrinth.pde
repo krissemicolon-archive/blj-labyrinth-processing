@@ -1,9 +1,11 @@
 import processing.sound.*;
+import controlP5.*;
 
-int state = 0;
+ControlP5 cp5;
+
 String result = "";
-int x = 30;
-int y = 690;
+int xK = 30;
+int yK = 690;
 int collisionIndex = 0;
 color white = color(255, 255, 255);
 color blue = color(0, 200, 255);
@@ -24,6 +26,7 @@ int pointsFinal;
 boolean gameOver = false;
 boolean start = true;
 boolean textInputIndex = true;
+String highscoreName;
 SoundFile collisionSound;
 SoundFile victorySound;
 SoundFile gameOverSound;
@@ -59,13 +62,21 @@ void setup() {
   gameOverSound = new SoundFile(this, "gameover.mp3");
   //backgroundMusic = new SoundFile(this, "background.mp3");
   //backgroundMusic.play();
+  PFont font = createFont("arial", 15);
+  cp5 = new ControlP5(this);
+  cp5.addTextfield("Name").setPosition(30, 160).setSize(180, 60).setAutoClear(false).setFont(font);
 }
+
 
 void mouseDragged() {
   if (isMouseOverCircle() == true) {
-    x = mouseX;
-    y = mouseY;
+    xK = mouseX;
+    yK = mouseY;
   }
+}
+void keyPressed(){
+
+    highscoreName = cp5.get(Textfield.class, "Name").getText();
 }
 
 void draw() {
@@ -116,11 +127,10 @@ void draw() {
 
     stroke(255, 0, 0);
     fill(255, 0, 0);
-    circle(x, y, circleSize);
+    circle(xK, yK, circleSize);
 
     textSize(30);
     text("Lives: " + lives, 15, 60);
-
 
     collisionIndex = 0;
     if (isBallInSquare(victorySquare) == true) {
