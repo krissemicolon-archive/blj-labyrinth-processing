@@ -71,10 +71,10 @@ void setup() {
   PFont font = createFont("arial", 15);
   cp5 = new ControlP5(this);
   //cp5.addTextfield("Name").setPosition(30, 160).setSize(180, 60).setAutoClear(false).setFont(font);
-  
+
   //nam = loadStrings("Data/playerName.txt");
-  
-  
+
+
   initSQL();
 }
 
@@ -147,12 +147,12 @@ void draw() {
     if (isBallInSquare(victorySquare) == true) {
       pointsFinal = points;
       if (textInputIndex == true) {
-        
+
         victorySound.play();
-        
+
         storehsSQL();
         getHighscoreSQL();    
-        
+
         stop();
         background(0, 0, 0);
         image(victory, 0, 0);

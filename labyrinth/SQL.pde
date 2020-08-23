@@ -5,8 +5,7 @@ String HighscoreInfo;
 
 
 void initSQL() {
-
-  hsdb = new MySQL(this, "192.168.1.52:3306", database, user, pass);
+  hsdb = new MySQL(this, "84.227.79.186:3306", database, user, pass);
 }
 
 void storehsSQL() {
@@ -14,19 +13,16 @@ void storehsSQL() {
   if (hsdb.connect()) {
     try {
       nam = loadStrings("Data/playerName.txt");
-      for (int i = 0 ; i < nam.length; i++) {
-        println(nam[i]);
-      
-      hsdb.query("USE labhighscoredb;");
-      hsdb.query("INSERT INTO highscores (`id`,`name`,`highscore`) VALUES (NULL, '%s', %d);", nam[i], pointsFinal);
+      for (int i = 0; i < nam.length; i++) {
 
-        }
 
+        hsdb.query("USE labhighscoredb;");
+        hsdb.query("INSERT INTO highscores (`id`,`name`,`highscore`) VALUES (NULL, '%s', %d);", nam[i], pointsFinal);
+      }
     }
     catch(Exception e) {
       println("Insertion Failed");
     }
-
   }
 }
 
@@ -36,5 +32,4 @@ void getHighscoreSQL() {
   hsdb.next();
   HighscoreInfo = hsdb.getString("name")+" "+hsdb.getInt("highscore");
   println(HighscoreInfo);
-  
 }
