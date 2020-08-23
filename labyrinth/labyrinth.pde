@@ -1,13 +1,12 @@
 import processing.sound.*;
 import controlP5.*;
-import processing.sound.*;
 import de.bezier.data.sql.*;
 import de.bezier.data.sql.mapper.*;
-import java.util.Collections;
+//import java.util.Collections;
 //import java.util.ArrayList;
+import java.util.*;
 
 MySQL hsdb;
-
 ControlP5 cp5;
 
 String result = "";
@@ -34,12 +33,11 @@ boolean gameOver = false;
 boolean start = true;
 boolean textInputIndex = true;
 String highscoreName;
+String[] nam;
 SoundFile collisionSound;
 SoundFile victorySound;
 SoundFile gameOverSound;
 SoundFile backgroundMusic;
-
-ArrayList<Integer> scores = new ArrayList();
 
 int rects[][] = {
   {0, 660, 720, 60}, 
@@ -70,19 +68,14 @@ void setup() {
   collisionSound = new SoundFile(this, "collision.mp3");
   victorySound = new SoundFile(this, "victory.mp3");
   gameOverSound = new SoundFile(this, "gameover.mp3");
-  //backgroundMusic = new SoundFile(this, "background.mp3");
-  //backgroundMusic.play();
   PFont font = createFont("arial", 15);
   cp5 = new ControlP5(this);
-  cp5.addTextfield("Name").setPosition(30, 160).setSize(180, 60).setAutoClear(false).setFont(font);
+  //cp5.addTextfield("Name").setPosition(30, 160).setSize(180, 60).setAutoClear(false).setFont(font);
   
-  //MSQL
-  String user = "player";
-  String pass = "thispassissecure";
-  String database = "labhighscoredb";
+  //nam = loadStrings("Data/playerName.txt");
   
   
-  hsdb = new MySQL(this, "84.227.79.186:3306", database, user, pass);
+  initSQL();
 }
 
 
@@ -92,10 +85,9 @@ void mouseDragged() {
     yK = mouseY;
   }
 }
-void keyPressed(){
-
-    highscoreName = cp5.get(Textfield.class, "Name").getText();
-}
+//void keyPressed(){
+//    highscoreName = cp5.get(Textfield.class, "Name").getText();
+//}
 
 void draw() {
   if (start == true) {
@@ -150,37 +142,28 @@ void draw() {
     textSize(30);
     text("Lives: " + lives, 15, 60);
 
+    // VICTORY
     collisionIndex = 0;
     if (isBallInSquare(victorySquare) == true) {
-      //backgroundMusic.stop();
       pointsFinal = points;
       if (textInputIndex == true) {
-        image(victory, 0, 0);
+        
         victorySound.play();
         
-        //SQL
-        if(hsdb.connect()){
-          hsdb.query("USE labhighscoredb");
-          hsdb.query("INSERT INTO `highscores` (`id`,`name`,`highscore`) VALUES (NULL, `%02d`, `%02d`);", highscoreName, pointsFinal);
-          hsdb.query("SELECT * FROM highscores");
-          
-          while(hsdb.next()) {
-            scores.add(hsdb.getInt("highscore"));
-          }
-          
-          int highscore = Collections.max(scores);
-          println(hsdb.getInt(1));
-        }
+        storehsSQL();
+        getHighscoreSQL();    
         
         stop();
+        background(0, 0, 0);
+        image(victory, 0, 0);
         textSize(40);
         text("Points: " + pointsFinal, 540, 500);
+        text("Highscore: "+HighscoreInfo, 540, 540);
       }
     }
   }
 
   if (lives == 0 || time.equals("000")) {
-    //backgroundMusic.stop();
     image(gameover, 0, 0);
     gameOverSound.play();
     stop();
